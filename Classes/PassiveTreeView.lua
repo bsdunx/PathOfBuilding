@@ -411,14 +411,15 @@ function PassiveTreeViewClass:Draw(build, viewPort, inputEvents)
 				-- Calculate color based on DPS and defensive powers
 				local offence = m_max(node.power.offence or 0, 0)
 				local defence = m_max(node.power.defence or 0, 0)
+				local ehp = m_max(node.power.ehp or 0, 0)
 				local dpsCol = (offence / build.calcsTab.powerMax.offence * 1.5) ^ 0.5
 				local defCol = (defence / build.calcsTab.powerMax.defence * 1.5) ^ 0.5
-				local mixCol = (m_max(dpsCol - 0.5, 0) + m_max(defCol - 0.5, 0)) / 2
-				if main.nodePowerTheme == "RED/BLUE" then
+				local mixCol = (ehp / build.calcsTab.powerMax.ehp * 1.5) ^ 0.5
+				if main.nodePowerTheme == "RED/BLUE/GREEN" then
 					SetDrawColor(dpsCol, mixCol, defCol)
-				elseif main.nodePowerTheme == "RED/GREEN" then
+				elseif main.nodePowerTheme == "RED/GREEN/BLUE" then
 					SetDrawColor(dpsCol, defCol, mixCol)
-				elseif main.nodePowerTheme == "GREEN/BLUE" then
+				elseif main.nodePowerTheme == "GREEN/BLUE/RED" then
 					SetDrawColor(mixCol, dpsCol, defCol)
 				end
 			else
@@ -625,7 +626,7 @@ function PassiveTreeViewClass:AddNodeTooltip(tooltip, node, build)
 	if launch.devModeAlt then
 		if node.power and node.power.offence then
 			-- Power debugging info
-			tooltip:AddLine(16, string.format("DPS power: %g   Defence power: %g", node.power.offence, node.power.defence))
+			tooltip:AddLine(16, string.format("DPS power: %g   Defence power: %g  eHP power: %g", node.power.offence, node.power.defence, node.power.ehp))
 		end
 	end
 
