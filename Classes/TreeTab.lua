@@ -85,8 +85,8 @@ local TreeTabClass = newClass("TreeTab", "ControlHost", function(self, build)
 		self.viewer.showHeatMap = state
 	end)
 	self.controls.treeHeatMap.tooltipText = function()
-		local offCol, defCol = main.nodePowerTheme:match("(%a+)/(%a+)")
-		return "When enabled, an estimate of the offensive and defensive strength of\neach unallocated passive is calculated and displayed visually.\nOffensive power shows as "..offCol:lower()..", defensive power as "..defCol:lower().."."
+		local offCol, ehpCol, defCol = main.nodePowerTheme:match("(%a+)/(%a+)/(%a+)")
+		return "When enabled, an estimate of the offensive and defensive strength of\neach unallocated passive is calculated and displayed visually.\nOffensive power shows as "..offCol:lower()..", eHP power as "..ehpCol:lower()..", defensive power as "..defCol:lower().."."
 	end
 	self.controls.specConvertText = new("LabelControl", {"BOTTOMLEFT",self.controls.specSelect,"TOPLEFT"}, 0, -14, 0, 16, "^7This is an older tree version, which may not be fully compatible with the current game version.")
 	self.controls.specConvertText.shown = function()

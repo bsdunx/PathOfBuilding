@@ -205,7 +205,7 @@ the "Releases" section of the GitHub page.]])
 	self.gameAccounts = { }
 
 	self.buildSortMode = "NAME"
-	self.nodePowerTheme = "RED/BLUE"
+	self.nodePowerTheme = "RED/GREEN/BLUE"
 
 	self:SetMode("BUILD", false, "Unnamed build")
 
@@ -531,10 +531,10 @@ function main:OpenOptionsPopup()
 		controls.buildPath:SetText(self.buildPath)
 	end
 	controls.buildPath.tooltipText = "Overrides the default save location for builds.\nThe default location is: '"..self.defaultBuildPath.."'"
-	controls.nodePowerTheme = new("DropDownControl", {"TOPLEFT",nil,"TOPLEFT"}, 150, 68, 100, 18, {
-		{ label = "Red & Blue", theme = "RED/BLUE" },
-		{ label = "Red & Green", theme = "RED/GREEN" },
-		{ label = "Green & Blue", theme = "GREEN/BLUE" },
+	controls.nodePowerTheme = new("DropDownControl", {"TOPLEFT",nil,"TOPLEFT"}, 150, 68, 140, 18, {
+		{ label = "Red, Green & Blue", theme = "RED/GREEN/BLUE" },
+		{ label = "Red, Blue & Green", theme = "RED/BLUE/GREEN" },
+		{ label = "Blue, Red & Green", theme = "BLUE/RED/GREEN" },
 	}, function(index, value)
 		self.nodePowerTheme = value.theme
 	end)

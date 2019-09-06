@@ -13,7 +13,7 @@ local m_floor = math.floor
 local band = bit.band
 
 local calcs = { }
-local sectionData = { } 
+local sectionData = { }
 for _, targetVersion in ipairs(targetVersionList) do
 	calcs[targetVersion] = LoadModule("Modules/Calcs", targetVersion)
 	sectionData[targetVersion] = LoadModule("Modules/CalcSections-"..targetVersion)
@@ -460,12 +460,14 @@ function CalcsTabClass:PowerBuilder()
 				node.power.offence = (output.CombinedDPS - calcBase.CombinedDPS) / calcBase.CombinedDPS / node.pathDist
 			end
 			node.power.defence =
-							 ((output.Armour - calcBase.Armour) / m_max(30000, calcBase.Armour) +
-							 (output.Evasion - calcBase.Evasion) / m_max(30000, calcBase.Evasion)) / node.pathDist
-							 --(output.LifeRegen - calcBase.LifeRegen) / 500 +
-							 --(output.EnergyShieldRegen - calcBase.EnergyShieldRegen) / 1000 / node.pathDist
-			node.power.ehp = ((output.LifeUnreserved - calcBase.LifeUnreserved) / m_max(10000, calcBase.Life) +
-							 (output.EnergyShield - calcBase.EnergyShield) / m_max(10000, calcBase.EnergyShield)) / node.pathDist
+							 ((output.Armour - calcBase.Armour) / m_max(15000, calcBase.Armour) +
+							 (output.Evasion - calcBase.Evasion) / m_max(15000, calcBase.Evasion) +
+							 (output.LifeRegen - calcBase.LifeRegen) / 500 +
+							 (output.EnergyShieldRegen - calcBase.EnergyShieldRegen) / 1000) /
+							 node.pathDist
+			node.power.ehp = ((output.LifeUnreserved - calcBase.LifeUnreserved) / m_max(5000, calcBase.Life) +
+							 (output.EnergyShield - calcBase.EnergyShield) / m_max(5000, calcBase.EnergyShield)) /
+							 node.pathDist
 			if node.path then
 				newPowerMax.offence = m_max(newPowerMax.offence, node.power.offence)
 				newPowerMax.defence = m_max(newPowerMax.defence, node.power.defence)

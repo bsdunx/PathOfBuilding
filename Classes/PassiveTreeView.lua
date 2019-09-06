@@ -68,7 +68,7 @@ function PassiveTreeViewClass:Draw(build, viewPort, inputEvents)
 
 	local cursorX, cursorY = GetCursorPos()
 	local mOver = cursorX >= viewPort.x and cursorX < viewPort.x + viewPort.width and cursorY >= viewPort.y and cursorY < viewPort.y + viewPort.height
-	
+
 	-- Process input events
 	local treeClick
 	for id, event in ipairs(inputEvents) do
@@ -414,13 +414,13 @@ function PassiveTreeViewClass:Draw(build, viewPort, inputEvents)
 				local ehp = m_max(node.power.ehp or 0, 0)
 				local dpsCol = (offence / build.calcsTab.powerMax.offence * 1.5) ^ 0.5
 				local defCol = (defence / build.calcsTab.powerMax.defence * 1.5) ^ 0.5
-				local mixCol = (ehp / build.calcsTab.powerMax.ehp * 1.5) ^ 0.5
-				if main.nodePowerTheme == "RED/BLUE/GREEN" then
-					SetDrawColor(dpsCol, mixCol, defCol)
-				elseif main.nodePowerTheme == "RED/GREEN/BLUE" then
-					SetDrawColor(dpsCol, defCol, mixCol)
-				elseif main.nodePowerTheme == "GREEN/BLUE/RED" then
-					SetDrawColor(mixCol, dpsCol, defCol)
+				local ehpCol = (ehp / build.calcsTab.powerMax.ehp * 1.5) ^ 0.5
+				if main.nodePowerTheme == "RED/GREEN/BLUE" then
+					SetDrawColor(dpsCol, ehpCol, defCol)
+				elseif main.nodePowerTheme == "RED/BLUE/GREEN" then
+					SetDrawColor(dpsCol, defCol, ehpCol)
+				elseif main.nodePowerTheme == "BLUE/RED/GREEN" then
+					SetDrawColor(defCol, dpsCol, ehpCol)
 				end
 			else
 				SetDrawColor(1, 1, 1)
